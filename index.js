@@ -1,7 +1,7 @@
+require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -89,9 +89,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) =>{
-    res.send("Home Pagee and hello");
+    res.send("Home Page!!");
 })
 
-app.listen(port, () =>{
-    console.log(`server running at port: ${port}`)
-})
+app.listen(port)
