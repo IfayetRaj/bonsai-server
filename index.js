@@ -50,6 +50,18 @@ async function run() {
         res.send(userResult);
     })
 
+    app.put('/myplants/:id', async(req, res) => {
+        const id = req.params.id;
+        const filter = { _id: new ObjectId(id) };
+        const option = { upsert: true };
+        const updatedPlant = req.body;
+        const updateDocs = {
+            $set: updatedPlant
+        };
+        const result = await userPlantCollection.updateOne(filter, updateDocs, option);
+        res.send(result);
+    });
+
     app.delete('/myplants/:id', async (req, res) =>{
         const id = req.params.id;
         const query = {_id: new ObjectId(id)};
@@ -72,8 +84,7 @@ async function run() {
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
+    
   }
 }
 run().catch(console.dir);
@@ -81,7 +92,7 @@ run().catch(console.dir);
 
 
 app.get('/', (req, res) =>{
-    res.send("Home Page");
+    res.send("Home Pagee and hello");
 })
 
 app.listen(port, () =>{
